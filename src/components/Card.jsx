@@ -7,6 +7,12 @@ function Card({searchTerm}) {
 
     const [searchData, setSearchData] = useState([]);
 
+    const [movieId, setMovieId] = useState(null);
+    const handleMovieId = (id)=>{
+      setMovieId(id)
+      console.log("setMovieId", id);
+    }
+
     console.log('search param', searchTerm)
     
     useEffect(()=>{
@@ -27,7 +33,9 @@ function Card({searchTerm}) {
     <div>
 
 
-        <SingleView />
+        <SingleView movieId={movieId} />
+
+
       <div className="row">
 
 
@@ -40,7 +48,9 @@ function Card({searchTerm}) {
               <img src={data.Poster} alt="" />
             </div>
             <div className="card-body">
-              <h4 className="card-title fw-bold">{data.Title}</h4>
+              <h4 
+              onClick={()=>{handleMovieId(data.imdbID)}}
+              className="card-title fw-bold cursor-pointer">{data.Title}</h4>
               <p>
               <b>Year: {data.Year}</b> &nbsp;
               <b>Type: {data.Type}</b>
